@@ -1,0 +1,62 @@
+/* 
+
+* #492540
+* #C03546
+* #F26D5B
+* #F6EA8C
+*  #333333
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #F6EA8C;
+    color: #492540;
+    font-family: "Montserrat", sans-serif;
+}
+section#head {
+  background-color:#492540;
+  margin-bottom: 10px;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ul {
+  list-style: none;
+}
+section#head section#title h1 a {
+  color: #F6EA8C;
+  text-decoration: none;
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: "Oleo Script", cursive;
+}
+
+section#head section#navigation ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+}
+section#head section#navigation ul li a {
+  color: #F6EA8C;
+  text-decoration: none;
+  padding: .5rem 1rem;
+  transition: all 0.5s ease-in-out;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  margin-left: .75rem;
+}
+section#head section#navigation ul li a:hover {
+  background: #F6EA8C;
+  color: #492540;
+}
+h1#heading{
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 2.5rem;
+}

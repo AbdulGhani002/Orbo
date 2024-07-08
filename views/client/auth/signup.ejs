@@ -1,0 +1,15 @@
+<%-include('../../shared/head')%>
+<title>Signup - Orbo Store</title>
+</head>
+<body>
+  <%- include('../../shared/navigation')%>
+    <section id="body">
+        <h1 id="heading">Signup</h1>
+        <form action="/signup" method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Signup">
+        </form>
+</body>
+</html>
