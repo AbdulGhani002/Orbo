@@ -1,15 +1,54 @@
 <%-include('../../shared/head')%>
+<link rel="stylesheet" href="/styles/auth.css">
 <title>Signup - Orbo Store</title>
 </head>
 <body>
   <%- include('../../shared/navigation')%>
+  <main>
     <section id="body">
         <h1 id="heading">Signup</h1>
         <form action="/signup" method="POST">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="submit" value="Signup">
+        <label for="name">
+          Full Name
+        </label>
+        <input type="text" name="name" id="name" required>
+        <label for="phone">
+          Phone
+        </label>
+        <input type="text" name="phone" id="phone" required>
+        <label for="street">
+          Street
+        </label>
+        <input type="text" name="street" id="street" required>
+        <label for="city">
+          City
+        </label>
+        <input type="text" name="city" id="city" required>
+        <label for="country">
+          Country
+        </label>
+        <input type="text" name="country" id="country" required>
+        <label for="postalCode">
+          Postal Code
+        </label>
+        <input type="text" name="postalCode" id="postalCode" required>
+        <hr>
+        <label for="email">
+          Email
+        </label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">
+          Password
+        </label>
+        <input type="password" name="password" id="password" required>
+        <label for="confirmPassword">
+          Confirm Password
+        </label>
+        <input type="password" name="confirmPassword" id="confirmPassword" required>
+        <button type="submit">Signup</button>
+            <p><a href="/login">Login</a> Instead.</p>
         </form>
+    </section>
+    </main>
 </body>
 </html>

@@ -1,0 +1,25 @@
+<%-include('../../shared/head')%>
+<link rel="stylesheet" href="/styles/auth.css">
+<title>Login - Orbo Store</title>
+</head>
+<body>
+<%- include('../../shared/navigation')%>
+<main>
+    <section id="body">
+        <h1 id="heading">Login</h1>
+        <form action="/login" method="POST">
+            <label for="email">
+                Email
+            </label>
+            <input type="email" name="email" id="email" required>
+            <label for="password">
+                Password
+            </label>
+            <input type="password" name="password" id="password" required>
+            <button type="submit">Login</button>
+            <p><a href="/signup">Signup</a> Instead.</p>
+        </form>
+    </section>
+</main>
+</body>
+</html>
