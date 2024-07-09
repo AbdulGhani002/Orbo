@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const db = require("./data/database");
 const { join } = require("path");
 
 const baseRoute = require("./routes/base.routes");
@@ -19,7 +20,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(baseRoute);
 app.use(authRoute);
+db.connectToDatabase().then(()=>{
+  app.listen(process.env.PORT || 5500, () => {
+    console.log("Server is running...");
+  });
+}).catch(error=>{
+  console.log(error);
+})
 
-app.listen(process.env.PORT || 5500, () => {
-  console.log("Server is running...");
-});
