@@ -2,7 +2,7 @@ const db = require('../data/database');
 const bcrypt = require('bcryptjs');
 
 class User {
-    constructor(name, phone, city, street, country, postalCode, email, password) {
+    constructor(email, password,name, phone, city, street, country, postalCode) {
         this._name = name;
         this._phone = phone;
         this._city = city;
