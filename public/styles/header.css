@@ -1,0 +1,33 @@
+.dropbtn {
+    border: none;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+
+.dropdown-content {
+    display: none;
+    margin-top: .25rem;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 5rem;
+    right: 2rem;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+ .show{
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #f1f1f1;
+}
