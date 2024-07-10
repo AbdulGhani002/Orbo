@@ -3,7 +3,7 @@ const express = require("express");
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const db = require("./data/database");
-const { join } = require("path");
+const {join} = require("path");
 
 const baseRoute = require("./routes/base.routes");
 const authRoute = require("./routes/auth.routes");
@@ -15,7 +15,7 @@ app.set("views", join(__dirname, "views"));
 
 app.use(express.static("public"));
 app.use(express.static("pictures"));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 app.use(session({
     secret: process.env.SESSION_SECRET,

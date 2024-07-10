@@ -1,6 +1,5 @@
 const User = require('../models/User.model');
-const bcrypt = require('bcrypt');
-const { body, validationResult } = require('express-validator');
+const {body, validationResult} = require('express-validator');
 
 
 const getSignup = (req, res) => {
@@ -21,24 +20,26 @@ const signup = [
     body('country').notEmpty().withMessage('Country is required').trim().escape(),
     body('postalCode').notEmpty().withMessage('Postal code is required').trim().escape(),
     body('email').isEmail().withMessage('Invalid email address').normalizeEmail(),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+    body('password').isLength({min: 6}).withMessage('Password must be at least 6 characters long'),
 
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({errors: errors.array()});
         }
 
-        const { name, phone, street, city, country, postalCode, email, password } = req.body;
+        const {name, phone, street, city, country, postalCode, email, password} = req.body;
 
         try {
 
-            const user = new User( email, password,name, phone, street, city, country, postalCode);
+            const user = new User(email, password, name, phone, street, city, country, postalCode);
             await user.signup();
-
-            res.status(201).json({ message: 'User signed up successfully' });
+            const storedUser = await User.login(user);
+            req.session.user = {id: storedUser._id, username: storedUser.name, email: storedUser.email};
+            req.session.isAuthenticated = true;
+            return res.status(200).redirect('/');
         } catch (error) {
-            res.status(500).json({ error: 'Server error' });
+            res.status(500).json({error: 'Server error'});
         }
     }
 ];
@@ -51,28 +52,43 @@ const login = [
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({errors: errors.array()});
         }
 
-        const { email, password } = req.body;
+        const {email, password} = req.body;
 
         try {
             const newUser = new User(email, password);
-            const user  = await User.login(newUser);;
+            const user = await User.login(newUser);
 
             if (!user) {
-                return res.status(400).json({ error: 'Invalid email or password' });
+                return res.status(400).json({error: 'Invalid email or password'});
             }
-            res.status(200).json({ message: 'User logged in successfully', user });
+            req.session.user = {id: user._id, username: user.name, email: user.email};
+            req.session.isAuthenticated = true;
+            return res.status(200).redirect('/');
         } catch (error) {
-            res.status(500).json({ error: 'Server error' });
+            res.status(500).json({error: 'Server error'});
         }
     }
 ];
+
+const logout = (req, res, next) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return next(err);
+        }
+
+        res.clearCookie('connect.sid', { path: '/' });
+        res.redirect('/');
+    });
+};
+
 
 module.exports = {
     getSignup,
     getLogin,
     signup,
-    login
+    login,
+    logout
 };
