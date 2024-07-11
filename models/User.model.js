@@ -2,113 +2,102 @@ const db = require('../data/database');
 const bcrypt = require('bcryptjs');
 
 class User {
-    constructor(email, password,name, phone, city, street, country, postalCode) {
-        this._name = name;
-        this._phone = phone;
-        this._city = city;
-        this._street = street;
-        this._country = country;
-        this._postalCode = postalCode;
-        this._email = email;
-        this._password = password;
+    #name;
+    #phone;
+    #city;
+    #street;
+    #country;
+    #postalCode;
+    #email;
+    #password;
+
+    constructor(email, password, name, phone, city, street, country, postalCode) {
+        this.#name = name;
+        this.#phone = phone;
+        this.#city = city;
+        this.#street = street;
+        this.#country = country;
+        this.#postalCode = postalCode;
+        this.#email = email;
+        this.#password = password;
     }
 
     get name() {
-        return this._name;
+        return this.#name;
     }
 
     set name(value) {
-        this._name = value;
+        this.#name = value;
     }
 
     get phone() {
-        return this._phone;
+        return this.#phone;
     }
 
     set phone(value) {
-        this._phone = value;
+        this.#phone = value;
     }
 
     get city() {
-        return this._city;
+        return this.#city;
     }
 
     set city(value) {
-        this._city = value;
+        this.#city = value;
     }
 
     get street() {
-        return this._street;
+        return this.#street;
     }
 
     set street(value) {
-        this._street = value;
+        this.#street = value;
     }
 
     get country() {
-        return this._country;
+        return this.#country;
     }
 
     set country(value) {
-        this._country = value;
+        this.#country = value;
     }
 
     get postalCode() {
-        return this._postalCode;
+        return this.#postalCode;
     }
 
     set postalCode(value) {
-        this._postalCode = value;
+        this.#postalCode = value;
     }
 
     get email() {
-        return this._email;
+        return this.#email;
     }
 
     set email(value) {
-        this._email = value;
+        this.#email = value;
     }
 
     get password() {
-        return this._password;
+        return this.#password;
     }
 
     set password(value) {
-        this._password = value;
+        this.#password = value;
     }
 
-    async signup() {
+    static async login(email, password) {
         try {
-            const hashedPassword = await bcrypt.hash(this._password, 12);
-            const newUser = {
-                name: this._name,
-                phone: this._phone,
-                city: this._city,
-                street: this._street,
-                country: this._country,
-                postalCode: this._postalCode,
-                email: this._email,
-                password: hashedPassword
-            };
-            return await db.getDb().collection('users').insertOne(newUser);
-        } catch (error) {
-            console.error('Error during user signup:', error);
-            throw error;
-        }
-    }
-
-    static async login(user) {
-        try {
-            const dbUser = await db.getDb().collection('users').findOne({ email: user._email });
+            const dbUser = await db.getDb().collection('users').findOne({ email });
             if (!dbUser) {
-                return false;
+                throw new Error('User not found');
             }
 
-            const passwordMatches = await User.hasSamePassword(user._password, dbUser.password);
+            const passwordMatches = await User.hasSamePassword(password, dbUser.password);
             if (passwordMatches) {
                 return dbUser;
             }
-            return false;
+            throw new Error('Invalid password');
         } catch (error) {
             console.error('Error during user login:', error);
             throw error;
@@ -116,7 +105,37 @@ class User {
     }
 
     static async hasSamePassword(inputPassword, dbPassword) {
-        return await bcrypt.compare(inputPassword, dbPassword);
+        return bcrypt.compare(inputPassword, dbPassword);
+    }
+
+    static async getUser(email) {
+        try {
+            return await db.getDb().collection('users').findOne({ email });
+        } catch (error) {
+            console.error('Error fetching user:', error);
+            throw error;
+        }
+    }
+
+    async signup() {
+        try {
+            const hashedPassword = await bcrypt.hash(this.#password, 12);
+            const newUser = {
+                name: this.#name,
+                phone: this.#phone,
+                city: this.#city,
+                street: this.#street,
+                country: this.#country,
+                postalCode: this.#postalCode,
+                email: this.#email,
+                password: hashedPassword
+            };
+            const result = await db.getDb().collection('users').insertOne(newUser);
+            return result;
+        } catch (error) {
+            console.error('Error during user signup:', error);
+            throw error;
+        }
     }
 }
 

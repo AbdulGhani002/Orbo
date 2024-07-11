@@ -1,0 +1,45 @@
+:root {
+    --dark-purple: #492540;
+    --medium-red: #C03546;
+    --light-red: #F26D5B;
+    --light-yellow: #F6EA8C;
+    --dark-grey: #333333;
+}
+form.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--dark-grey);
+    border-radius: 4px;
+}
+
+.btn-submit {
+    padding: 0.75rem;
+    background-color: var(--medium-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: var(--light-red);
+}

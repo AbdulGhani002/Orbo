@@ -1,0 +1,30 @@
+    <%- include('../shared/head') %>
+    <title>Orbo - Edit Profile</title>
+    <link rel="stylesheet" href="/styles/edit-profile.css">
+</head>
+<body>
+<%- include('../shared/navigation') %>
+<section id="body">
+    <h1 id="heading">Edit Profile</h1>
+    <form class="edit-profile-form">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<%= user.name%>">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<%=user.email%>">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" value="<%=user.phone%>">
+        </div>
+        <div class="form-group">
+            <label for="profile-picture">Profile Picture:</label>
+            <input type="file" id="profile-picture" name="profile-picture">
+        </div>
+        <button type="submit" class="btn-submit">Save Changes</button>
+    </form>
+</section>
+</body>
+</html>
