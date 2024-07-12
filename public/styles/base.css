@@ -1,10 +1,10 @@
 /* 
 
-* #492540
-* #C03546
-* #F26D5B
-* #F6EA8C
-*  #333333
+ #492540
+ #C03546
+ #F26D5B
+ #F6EA8C
+  #333333
 */
 * {
   margin: 0;
@@ -58,4 +58,46 @@ h1#heading{
   margin-top: 2rem;
   text-align: center;
   font-size: 2.5rem;
+}
+
+
+
+
+#products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.product {
+  background-color: #C03546;
+  color: #F6EA8C;
+  border: 1px solid #492540;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  width: 200px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.product h2 {
+  font-size: 1.5rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.product p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.product:hover {
+  transform: scale(1.05);
 }

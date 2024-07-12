@@ -86,14 +86,14 @@ class User {
         this.#password = value;
     }
 
-    static async login(email, password) {
+    static async login(user) {
         try {
-            const dbUser = await db.getDb().collection('users').findOne({ email });
+            const dbUser = await db.getDb().collection('users').findOne({ email:user.email });
             if (!dbUser) {
                 throw new Error('User not found');
             }
 
-            const passwordMatches = await User.hasSamePassword(password, dbUser.password);
+            const passwordMatches = await User.hasSamePassword(user.password, dbUser.password);
             if (passwordMatches) {
                 return dbUser;
             }
