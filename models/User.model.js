@@ -137,6 +137,31 @@ class User {
             throw error;
         }
     }
+
+    async updateUser(email){
+        try {
+            const updatedUser = {
+                name: this.#name,
+                phone: this.#phone,
+                city: this.#city,
+                street: this.#street,
+                country: this.#country,
+                postalCode: this.#postalCode
+            };
+            const result = await db.getDb().collection('users').updateOne({email: email}, {$set: {
+                name: updatedUser.name,
+                phone: updatedUser.phone,
+                city: updatedUser.city,
+                street: updatedUser.street,
+                country: updatedUser.country,
+                postalCode: updatedUser.postalCode
+            }});
+            return result;
+        } catch (error) {
+            console.error('Error updating user:', error);
+            throw error;
+        }
+    }
 }
 
 module.exports = User;

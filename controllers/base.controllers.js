@@ -1,11 +1,24 @@
 const User = require('../models/User.model');
 
+
 const getHome = (req, res) => {
     res.render("client/home");
 }
 
-const getProfilePage = (req, res) => {
-    res.render("client/profile");
+const getProfilePage = async (req, res) => {
+    const sessionUserEmail = req.session.user.email;
+        const user = await User.getUser(sessionUserEmail);
+
+        if (!user) {
+            return res.status(404).render('client/error', { message: 'User not found' });
+        }
+
+        const userData = {
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+        }
+    res.render("client/profile" , {user: userData});
 }
 
 const getEditProfilePage = async (req, res) => {
@@ -34,8 +47,35 @@ const getEditProfilePage = async (req, res) => {
     }
 }
 
+const postEditProfilePage = async (req, res) => {
+    try {
+        const sessionUserEmail = req.session.user.email;
+        const user = await User.getUser(sessionUserEmail);
+
+        if (!user) {
+            return res.status(404).render('client/error', { message: 'User not found' });
+        }
+
+        const { name, phone, city,street, country, postalCode } = req.body;
+        const profilePic = req.file ? req.file['profile-picture'] : null;
+        console.log(profilePic);
+        const updatedUser = new User('','',name, phone, street, city, country, postalCode);
+        const updated = await updatedUser.updateUser(sessionUserEmail);
+        console.log(updated);
+        if (updated) {
+            return res.redirect('/profile');
+        }
+
+        res.redirect('/profile');
+    } catch (error) {
+        console.error('Error updating user profile:', error);
+        res.status(500).render('client/error', { message: 'Internal Server Error' });
+    }
+}
+
 module.exports = {
     getHome,
     getProfilePage,
-    getEditProfilePage
+    getEditProfilePage,
+    postEditProfilePage
 }

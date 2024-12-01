@@ -6,18 +6,36 @@
 <%- include('../shared/navigation') %>
 <section id="body">
     <h1 id="heading">Edit Profile</h1>
-    <form class="edit-profile-form">
+    <form class="edit-profile-form" action="/edit-profile" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="<%= user.name%>">
         </div>
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<%=user.email%>">
-        </div>
-        <div class="form-group">
             <label for="phone">Phone:</label>
             <input type="text" id="phone" name="phone" value="<%=user.phone%>">
+        </div>
+        <div class="form-group">
+            <label for="street">Street</label>
+            <input type="text" name="street" id="street" value="<%= user.street%>">
+        </div>
+        <div class="form-group">
+            <label for="city">
+                City
+              </label>
+              <input type="text" name="city" id="city" value="<%= user.city%>">
+        </div>
+        <div class="form-group">
+            <label for="country">
+                Country
+              </label>
+              <input type="text" name="country" id="country" value="<%= user.country%>">
+        </div>
+        <div class="form-group">
+            <label for="postalCode">
+                Postal Code
+              </label>
+              <input type="text" name="postalCode" id="postalCode" value="<%= user.postalCode%>">
         </div>
         <div class="form-group">
             <label for="profile-picture">Profile Picture:</label>
