@@ -2,89 +2,19 @@ const db = require('../data/database');
 const bcrypt = require('bcryptjs');
 
 class User {
-    #name;
-    #phone;
-    #city;
-    #street;
-    #country;
-    #postalCode;
-    #email;
-    #password;
 
-    constructor(email, password, name, phone, city, street, country, postalCode) {
-        this.#name = name;
-        this.#phone = phone;
-        this.#city = city;
-        this.#street = street;
-        this.#country = country;
-        this.#postalCode = postalCode;
-        this.#email = email;
-        this.#password = password;
+    constructor(email, password, name, phone, city, street, country, postalCode , profilePicPath) {
+        this.name = name;
+        this.phone = phone;
+        this.city = city;
+        this.street = street;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.email = email;
+        this.password = password;
+        this.profilePicPath = profilePicPath || 'default.png';
     }
 
-    get name() {
-        return this.#name;
-    }
-
-    set name(value) {
-        this.#name = value;
-    }
-
-    get phone() {
-        return this.#phone;
-    }
-
-    set phone(value) {
-        this.#phone = value;
-    }
-
-    get city() {
-        return this.#city;
-    }
-
-    set city(value) {
-        this.#city = value;
-    }
-
-    get street() {
-        return this.#street;
-    }
-
-    set street(value) {
-        this.#street = value;
-    }
-
-    get country() {
-        return this.#country;
-    }
-
-    set country(value) {
-        this.#country = value;
-    }
-
-    get postalCode() {
-        return this.#postalCode;
-    }
-
-    set postalCode(value) {
-        this.#postalCode = value;
-    }
-
-    get email() {
-        return this.#email;
-    }
-
-    set email(value) {
-        this.#email = value;
-    }
-
-    get password() {
-        return this.#password;
-    }
-
-    set password(value) {
-        this.#password = value;
-    }
 
     static async login(user) {
         try {
@@ -119,16 +49,17 @@ class User {
 
     async signup() {
         try {
-            const hashedPassword = await bcrypt.hash(this.#password, 12);
+            const hashedPassword = await bcrypt.hash(this.password, 12);
             const newUser = {
-                name: this.#name,
-                phone: this.#phone,
-                city: this.#city,
-                street: this.#street,
-                country: this.#country,
-                postalCode: this.#postalCode,
-                email: this.#email,
-                password: hashedPassword
+                name: this.name,
+                phone: this.phone,
+                city: this.city,
+                street: this.street,
+                country: this.country,
+                postalCode: this.postalCode,
+                email: this.email,
+                password: hashedPassword,
+                profilePicPath: this.profilePicPath
             };
             const result = await db.getDb().collection('users').insertOne(newUser);
             return result;
@@ -141,12 +72,13 @@ class User {
     async updateUser(email){
         try {
             const updatedUser = {
-                name: this.#name,
-                phone: this.#phone,
-                city: this.#city,
-                street: this.#street,
-                country: this.#country,
-                postalCode: this.#postalCode
+                name: this.name,
+                phone: this.phone,
+                city: this.city,
+                street: this.street,
+                country: this.country,
+                postalCode: this.postalCode,
+                profilePicPath: this.profilePicPath
             };
             const result = await db.getDb().collection('users').updateOne({email: email}, {$set: {
                 name: updatedUser.name,
@@ -154,7 +86,8 @@ class User {
                 city: updatedUser.city,
                 street: updatedUser.street,
                 country: updatedUser.country,
-                postalCode: updatedUser.postalCode
+                postalCode: updatedUser.postalCode,
+                profilePicPath: updatedUser.profilePicPath
             }});
             return result;
         } catch (error) {

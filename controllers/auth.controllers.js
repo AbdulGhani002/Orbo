@@ -1,6 +1,6 @@
+const { upload } = require('../middlewares/uploadFiles');
 const User = require('../models/User.model');
 const {body, validationResult} = require('express-validator');
-
 
 const getSignup = (req, res) => {
     res.render('client/auth/signup');
@@ -29,10 +29,13 @@ const signup = [
         }
 
         const {name, phone, street, city, country, postalCode, email, password} = req.body;
-
+        const profilePicPath = req.file ? req.file.filename : "default.png";
         try {
 
-            const user = new User(email, password, name, phone, street, city, country, postalCode);
+            const user = new User(email, password, name, phone, street, city, country, postalCode , profilePicPath);
+            if(await User.getUser(email)){
+                return res.status(400).json({error: 'User already exists'});
+            }
             await user.signup();
             const storedUser = await User.login(user);
             req.session.user = {id: storedUser._id, username: storedUser.name, email: storedUser.email};

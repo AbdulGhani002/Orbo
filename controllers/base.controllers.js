@@ -1,5 +1,5 @@
+const { profile } = require('console');
 const User = require('../models/User.model');
-
 
 const getHome = (req, res) => {
     res.render("client/home");
@@ -17,6 +17,7 @@ const getProfilePage = async (req, res) => {
             name: user.name,
             email: user.email,
             phone: user.phone,
+            profilePicPath: user.profilePicPath,
         }
     res.render("client/profile" , {user: userData});
 }
@@ -37,7 +38,7 @@ const getEditProfilePage = async (req, res) => {
             city: user.city,
             street: user.street,
             country: user.country,
-            postalCode: user.postalCode
+            postalCode: user.postalCode,
         }
 
         res.render('client/edit-profile', { user: userData });
@@ -57,16 +58,17 @@ const postEditProfilePage = async (req, res) => {
         }
 
         const { name, phone, city,street, country, postalCode } = req.body;
-        const profilePic = req.file ? req.file['profile-picture'] : null;
-        console.log(profilePic);
-        const updatedUser = new User('','',name, phone, street, city, country, postalCode);
-        const updated = await updatedUser.updateUser(sessionUserEmail);
-        console.log(updated);
-        if (updated) {
+        const profilePicPath = req.file ? req.file.filename : user.profilePicPath;
+
+        const updatedUser = new User('', '', name, phone, city, street, country, postalCode, profilePicPath);
+        const result = await updatedUser.updateUser(sessionUserEmail);
+
+        if (result.modifiedCount > 0) {
+            return res.redirect('/profile');
+        } else {
             return res.redirect('/profile');
         }
 
-        res.redirect('/profile');
     } catch (error) {
         console.error('Error updating user profile:', error);
         res.status(500).render('client/error', { message: 'Internal Server Error' });

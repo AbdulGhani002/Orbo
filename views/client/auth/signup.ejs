@@ -7,7 +7,7 @@
   <main>
     <section id="body">
         <h1 id="heading">Signup</h1>
-        <form action="/signup" method="POST">
+        <form action="/signup" method="POST" enctype="multipart/form-data">
         <label for="name">
           Full Name
         </label>
@@ -45,6 +45,8 @@
           Confirm Password
         </label>
         <input type="password" name="confirmPassword" id="confirmPassword" required>
+        <label for="profile-picture">Profile Picture:</label>
+        <input type="file" id="profile-picture" name="profilePic" accept="image/*" required>
         <button type="submit">Signup</button>
             <p><a href="/login">Login</a> Instead.</p>
         </form>
