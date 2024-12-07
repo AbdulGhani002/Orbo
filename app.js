@@ -7,6 +7,7 @@ const {join} = require("path");
 
 const baseRoute = require("./routes/base.routes");
 const authRoute = require("./routes/auth.routes");
+const adminRoute = require("./routes/admin.routes");
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(session({
 
 app.use(baseRoute);
 app.use(authRoute);
+app.use(adminRoute);
 
 db.connectToDatabase().then(() => {
     app.listen(process.env.PORT || 5500, () => {

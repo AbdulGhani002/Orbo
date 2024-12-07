@@ -1,4 +1,3 @@
-const { upload } = require('../middlewares/uploadFiles');
 const User = require('../models/User.model');
 const {body, validationResult} = require('express-validator');
 
@@ -40,6 +39,7 @@ const signup = [
             const storedUser = await User.login(user);
             req.session.user = {id: storedUser._id, username: storedUser.name, email: storedUser.email};
             req.session.isAuthenticated = true;
+            req.session.isAdmin = storedUser.isAdmin;
             return res.status(200).redirect('/');
         } catch (error) {
             res.status(500).json({error: 'Server error'});
@@ -69,6 +69,7 @@ const login = [
             }
             req.session.user = {id: user._id, username: user.name, email: user.email};
             req.session.isAuthenticated = true;
+            req.session.isAdmin = user.isAdmin;
             return res.status(200).redirect('/');
         } catch (error) {
             res.status(500).json({error: 'Server error'});

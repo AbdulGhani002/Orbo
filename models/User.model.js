@@ -13,6 +13,7 @@ class User {
         this.email = email;
         this.password = password;
         this.profilePicPath = profilePicPath || 'default.png';
+        this.isAdmin = false;
     }
 
 
@@ -59,7 +60,8 @@ class User {
                 postalCode: this.postalCode,
                 email: this.email,
                 password: hashedPassword,
-                profilePicPath: this.profilePicPath
+                profilePicPath: this.profilePicPath,
+                isAdmin: this.isAdmin
             };
             const result = await db.getDb().collection('users').insertOne(newUser);
             return result;
@@ -68,6 +70,34 @@ class User {
             throw error;
         }
     }
+
+    static async getAllUsers(){
+        try {
+            return await db.getDb().collection('users').find().toArray();
+        } catch (error) {
+            console.error('Error fetching users:', error);
+            throw error;
+        }
+    }
+
+    static async findByIdAndUpdate(userId, updatedData) {
+        try {
+          const updateResult = await db.getDb().collection('users').updateOne(
+            { _id: new db.ObjectId(userId) },
+            { $set: updatedData }
+          );
+    
+          if (updateResult.modifiedCount === 0) {
+            throw new Error('User not found or no changes made');
+          }
+    
+          const updatedUser = await db.getDb().collection('users').findOne({ _id: new db.ObjectId(userId) });
+          return updatedUser;
+        } catch (error) {
+          console.error('Error updating user by ID:', error);
+          throw error;
+        }
+      }
 
     async updateUser(email){
         try {
@@ -78,7 +108,8 @@ class User {
                 street: this.street,
                 country: this.country,
                 postalCode: this.postalCode,
-                profilePicPath: this.profilePicPath
+                profilePicPath: this.profilePicPath,
+                isAdmin: this.isAdmin
             };
             const result = await db.getDb().collection('users').updateOne({email: email}, {$set: {
                 name: updatedUser.name,

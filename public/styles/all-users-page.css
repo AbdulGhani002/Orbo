@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #F6EA8C;
+    color: #492540;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  #heading {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #492540;
+  }
+  
+  th {
+    background-color: #492540;
+    color: #F6EA8C;
+  }
+  
+  td {
+    background-color: #F6EA8C;
+    color: #492540;
+  }
+  
+  td:hover {
+    background-color: #C03546;
+    color: #F6EA8C;
+  }
+  
+  button {
+    padding: 6px 12px;
+    background-color: #F26D5B;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #C03546;
+  }
+  
+  a {
+    margin-left: 10px;
+    color: #F26D5B;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  form {
+    display: inline;
+  }
+  
+  form button {
+    background-color: #F26D5B;
+  }
+  
+  form button:hover {
+    background-color: #C03546;
+  }
+  
+  @media (max-width: 768px) {
+    table {
+      font-size: 12px;
+    }
+  
+    th, td {
+      padding: 8px;
+    }
+  
+    #heading {
+      font-size: 20px;
+    }
+  }
+  
