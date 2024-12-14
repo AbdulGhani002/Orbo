@@ -1,0 +1,79 @@
+#products-management {
+    margin: 2rem;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+
+  table th, table td {
+    border: 1px solid #492540;
+    padding: 0.75rem;
+    text-align: center;
+  }
+
+  table th {
+    background-color: #C03546;
+    color: #F6EA8C;
+  }
+
+  table tr:nth-child(even) {
+    background-color: #F6EA8C;
+  }
+
+  table tr:nth-child(odd) {
+    background-color: #F26D5B;
+    color: #492540;
+  }
+
+  .actions button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .actions .edit {
+    background-color: #F6EA8C;
+    color: #492540;
+  }
+
+  .actions .edit:hover {
+    background-color: #C03546;
+    color: #F6EA8C;
+  }
+
+  .actions .delete {
+    background-color: #492540;
+    color: #F6EA8C;
+  }
+
+  .actions .delete:hover {
+    background-color: #F26D5B;
+  }
+
+  .add-product {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #492540;
+    color: #F6EA8C;
+    border: none;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .add-product:hover {
+    background-color: #C03546;
+    color: #F6EA8C;
+  }

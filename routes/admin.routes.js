@@ -10,5 +10,6 @@ router.get("/all-users" , isAuthenticated, isAdmin, adminController.getAllUsers)
 
 router.post('/admin/restrict/:id', adminController.restrictUser);
 
+router.get("/manage-products", isAuthenticated, isAdmin, adminController.manageProducts);
 
 module.exports = router;

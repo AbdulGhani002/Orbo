@@ -1,7 +1,6 @@
 const User = require("../models/User.model");
 
 const getAllUsers = async (req, res) => {
-  console.log("Got here");
   try {
     console.log("Got here too");
     const users = await User.getAllUsers();
@@ -18,7 +17,18 @@ const restrictUser = async (req, res) => {
   res.redirect("/admin/users");
 };
 
+const getAdminHomePage = (req, res) => {
+  const adminName = req.session.user.username;
+  res.render("admin/home", { admin: adminName });
+};
+
+const manageProducts = (req, res) => {
+  res.render("admin/products/products-dashboard");
+};
+
 module.exports = {
   getAllUsers,
   restrictUser,
+  getAdminHomePage,
+  manageProducts,
 };

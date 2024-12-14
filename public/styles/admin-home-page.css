@@ -1,0 +1,75 @@
+#dashboard {
+  margin: 2rem;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card {
+  background-color: #c03546;
+  color: #f6ea8c;
+  border: 1px solid #492540;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  width: 250px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #f6ea8c;
+  text-decoration: none;
+  background-color: #492540;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.card a:hover {
+  background-color: #f26d5b;
+}
+
+.charts {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+}
+
+.chart img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #492540;
+  border-radius: 0.5rem;
+}
+
+section#footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  background-color: #333333;
+  color: #f6ea8c;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.hr-admin-dashboard-page {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: 0;
+    border-top: .25rem solid #492540;
+    border-radius: .25rem;
+    width: 50%;
+    height: auto;
+}

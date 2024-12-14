@@ -1,0 +1,60 @@
+<%- include('../shared/head') %>
+<link rel="stylesheet" href="/styles/admin-home-page.css">
+<title>Orbo - Admin</title>
+</head>
+<body>
+  <%- include('../shared/navigation') %>
+
+  <h1 id="heading">Welcome, <%=admin%>!</h1>
+
+  <section id="dashboard">
+    <div class="admin-section">
+        <center>
+            <h2>Quick Actions</h2>
+            <hr class="hr-admin-dashboard-page">
+        </center>
+      <div class="cards">
+        <div class="card">
+          <h3>Manage Orders</h3>
+          <p>View and update customer orders.</p>
+          <a href="#orders">Go to Orders</a>
+        </div>
+        <div class="card">
+          <h3>Manage Products</h3>
+          <p>Add, edit, or remove products.</p>
+          <a href="/manage-products">Go to Products</a>
+        </div>
+        <div class="card">
+          <h3>Manage Customers</h3>
+          <p>View customer details and history.</p>
+          <a href="#customers">Go to Customers</a>
+        </div>
+        <div class="card">
+          <h3>Analytics</h3>
+          <p>View sales reports and trends.</p>
+          <a href="#analytics">Go to Analytics</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="analytics">
+    <div class="admin-section">
+        <center>
+            <h2>Analytics Overview</h2>
+            <hr class="hr-admin-dashboard-page">
+        </center>
+      <div class="charts">
+        <div class="chart">
+          <h3>Sales</h3>
+          <img src="/pictures/sales-chart.png" alt="Sales Chart">
+        </div>
+        <div class="chart">
+          <h3>Orders</h3>
+          <img src="/pictures/orders-chart.png" alt="Orders Chart">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include('./admin_includes/footer') %>

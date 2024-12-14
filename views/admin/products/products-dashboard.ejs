@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="styles/products-management.css">
+<title>Manage Products - Orbo Store</title>
+  <%- include('../../shared/head') %>
+</head>
+<body>
+  <%- include('../../shared/navigation') %>
+
+  <section id="products-management">
+    <h1 id="heading">Manage Products</h1>
+    <a href="#addProductModal" class="add-product">Add New Product</a>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>101</td>
+            <td>Sample Product</td>
+            <td>$10.00</td>
+            <td>50</td>
+            <td class="actions">
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add Product Modal (to be implemented) -->
+    <div id="addProductModal" style="display:none;">
+      <!-- Modal content for adding a new product -->
+    </div>
+  </section>
+  <%- include('../admin_includes/footer') %>
