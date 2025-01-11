@@ -26,6 +26,7 @@ class User {
 
             const passwordMatches = await User.hasSamePassword(user.password, dbUser.password);
             if (passwordMatches) {
+                console.log('password matched')
                 return dbUser;
             }
             throw new Error('Invalid password');

@@ -63,6 +63,7 @@ const login = [
         try {
             const newUser = new User(email, password);
             const user = await User.login(newUser);
+            console.log('loginned')
 
             if (!user) {
                 return res.status(400).json({error: 'Invalid email or password'});
