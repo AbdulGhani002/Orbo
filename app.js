@@ -31,9 +31,9 @@ app.use(session({
     }
 }));
 
+app.use(adminRoute);
 app.use(baseRoute);
 app.use(authRoute);
-app.use(adminRoute);
 
 db.connectToDatabase().then(() => {
     app.listen(process.env.PORT || 5500, () => {

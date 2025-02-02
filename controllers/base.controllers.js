@@ -1,8 +1,12 @@
-const { profile } = require('console');
 const User = require('../models/User.model');
+const Product = require("../models/Product.model");
 
-const getHome = (req, res) => {
-    res.render("client/home");
+const getHome = async (req, res) => {
+    if(req.session.isAdmin){
+        return res.redirect('/admin-dashboard');
+    }
+    const products = await Product.getAllProducts();
+    return res.render("client/home" , {products});
 }
 
 const getProfilePage = async (req, res) => {

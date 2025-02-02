@@ -1,27 +1,26 @@
-<%- include('../shared/head')%>
-    <title>Orbo - Buy anything you want!</title>
-  </head>
-  <body>
-    <%-include('../shared/navigation')%>
-    <section id="body">
-      <h1 id="heading">Welcome to Orbo Store!</h1>
-      <section id="products">
-        <div class="product">
-          <img src="/pictures/pexels-miami302-26443251.jpg" alt="Product 1">
-          <h2>Product 1</h2>
-          <p>$10.00</p>
-        </div>
-        <div class="product">
-          <img src="/pictures/pexels-miami302-26443251.jpg" alt="Product 2">
-          <h2>Product 2</h2>
-          <p>$20.00</p>
-        </div>
-        <div class="product">
-          <img src="/pictures/pexels-miami302-26443251.jpg" alt="Product 3">
-          <h2>Product 3</h2>
-          <p>$30.00</p>
-        </div>
-      </div>
+<%- include('../shared/head') %>
+<title>Orbo - Buy anything you want!</title>
+</head>
+<body>
+  <%- include('../shared/navigation') %>
+
+  <section id="body">
+    <h1 id="heading">Welcome to Orbo Store!</h1>
+
+    <section id="products">
+      <% if (products.length > 0) { %>
+        <% products.forEach(product => { %>
+          <div class="product">
+            <img src="/data/<%=product.imageUrl%>" alt="<%= product.name %>">
+            <h2><%= product.name %></h2>
+            <p>$<%= product.price.toFixed(2) %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p>No products available.</p>
+      <% } %>
     </section>
-  </body>
+
+  </section>
+</body>
 </html>

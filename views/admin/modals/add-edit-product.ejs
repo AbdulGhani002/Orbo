@@ -1,0 +1,47 @@
+
+  <!-- Add Product Modal -->
+  <div id="addProductModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeAddProductModal()">&times;</span>
+      <h2>Add New Product</h2>
+      <form id="addProductForm" enctype="multipart/form-data" onsubmit="submitProduct(event)">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="name" required>
+        
+        <label for="productPrice">Price:</label>
+        <input type="number" id="productPrice" name="price" required>
+        
+        <label for="productStock">Stock:</label>
+        <input type="number" id="productStock" name="stock" required>
+        
+        <label for="productImage">Product Image:</label>
+        <input type="file" id="productImage" name="productImage" accept="image/*">
+        
+        <button type="submit">Add Product</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Product Modal -->
+  <div id="editProductModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditProductModal()">&times;</span>
+      <h2>Edit Product</h2>
+      <form id="editProductForm" enctype="multipart/form-data" onsubmit="submitEditProduct(event)">
+        <input type="hidden" id="editProductId" name="productId">
+        <label for="editProductName">Product Name:</label>
+        <input type="text" id="editProductName" name="name" required>
+
+        <label for="editProductPrice">Price:</label>
+        <input type="number" id="editProductPrice" name="price" required>
+        
+        <label for="editProductStock">Stock:</label>
+        <input type="number" id="editProductStock" name="stock" required>
+        
+        <label for="editProductImage">Product Image:</label>
+        <input type="file" id="editProductImage" name="productImage" accept="image/*">
+        
+        <button type="submit">Update Product</button>
+      </form>
+    </div>
+  </div>

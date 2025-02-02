@@ -1,43 +1,44 @@
-<link rel="stylesheet" href="styles/products-management.css">
+<link rel="stylesheet" href="/styles/products-management.css">
 <title>Manage Products - Orbo Store</title>
-  <%- include('../../shared/head') %>
+<%- include('../../shared/head') %>
 </head>
 <body>
+  <script src="/scripts/products-management.js" defer ></script>
   <%- include('../../shared/navigation') %>
 
   <section id="products-management">
     <h1 id="heading">Manage Products</h1>
-    <a href="#addProductModal" class="add-product">Add New Product</a>
+    <a href="#" class="add-product" onclick="openAddProductModal()">Add New Product</a>
 
     <div class="table-container">
       <table>
         <thead>
           <tr>
-            <th>Product ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Actions</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Image</th>
+              <th>Actions</th>
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>101</td>
-            <td>Sample Product</td>
-            <td>$10.00</td>
-            <td>50</td>
-            <td class="actions">
-              <button class="edit">Edit</button>
-              <button class="delete">Delete</button>
-            </td>
-          </tr>
-        </tbody>
+      </thead>
+      <tbody>
+          <% products.forEach(product => { %>
+              <tr data-id="<%= product._id %>">
+                  <td><%= product.name %></td>
+                  <td>$<%= product.price ? product.price.toFixed(2) : '0.00' %></td>
+                  <td><%= product.stock %></td>
+                  <td><img src="<%= product.imageUrl %>" alt="<%= product.name %>" class="product-image"></td>
+                  <td class="actions">
+                      <button class="edit" onclick="openEditProductModal('<%= product._id %>')">Edit</button>
+                      <button class="delete" onclick="deleteProduct('<%= product._id %>')">Delete</button>
+                  </td>
+              </tr>
+          <% }); %>
+      </tbody>
+      
       </table>
     </div>
-
-    <!-- Add Product Modal (to be implemented) -->
-    <div id="addProductModal" style="display:none;">
-      <!-- Modal content for adding a new product -->
-    </div>
   </section>
+
+  <%- include('../modals/add-edit-product') %>
   <%- include('../admin_includes/footer') %>
